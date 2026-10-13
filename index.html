@@ -1,5 +1,178 @@
-<html>
-  <body>
-    <p>
-      <b>"Welcome to HCLTech" </b>
-      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table Generator</title>
+    <style>
+        /* Modern reset and subtle background gradient */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Card Container */
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            color: #333333;
+            margin-top: 0;
+        }
+
+        /* Input Controls */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            width: 70%;
+            padding: 10px;
+            border: 2px solid #8ec5fc;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            border-color: #6c5ce7;
+        }
+
+        button {
+            padding: 10px 18px;
+            background-color: #6c5ce7;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #5a4bcf;
+        }
+
+        /* Styled Colored Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        th {
+            background-color: #6c5ce7;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            color: #2d3436;
+            font-size: 15px;
+            border-bottom: 1px solid #dfe6e9;
+        }
+
+        /* Alternating row colors for better visibility */
+        tr:nth-child(even) {
+            background-color: #f1f2f6;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #eccc68; /* Pastel warm accent */
+            color: #2f3542;
+        }
+
+        tr:hover {
+            background-color: #70a1ff;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Table Generator</h2>
+        
+        <div class="input-group">
+            <input type="number" id="numberInput" placeholder="Enter a number..." min="1">
+            <br>
+            <button onclick="generateTable()">Print Table</button>
+        </div>
+
+        <!-- Table Output Container -->
+        <div id="tableContainer"></div>
+    </div>
+
+    <script>
+        function generateTable() {
+            const inputVal = document.getElementById("numberInput").value;
+            const tableContainer = document.getElementById("tableContainer");
+
+            // Clear previous output
+            tableContainer.innerHTML = "";
+
+            if (inputVal === "" || isNaN(inputVal)) {
+                tableContainer.innerHTML = "<p style='color:red;'>Please enter a valid number!</p>";
+                return;
+            }
+
+            const num = parseInt(inputVal);
+
+            // Create <table> element
+            let tableHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Multiplier</th>
+                            <th>Expression</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            // Loop to construct rows 1 to 10
+            for (let i = 1; i <= 10; i++) {
+                tableHTML += `
+                    <tr>
+                        <td>${num} &times; ${i}</td>
+                        <td>${num} * ${i}</td>
+                        <td><b>${num * i}</b></td>
+                    </tr>
+                `;
+            }
+
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+
+            // Render table to DOM
+            tableContainer.innerHTML = tableHTML;
+        }
+    </script>
+
+</body>
+</html>
